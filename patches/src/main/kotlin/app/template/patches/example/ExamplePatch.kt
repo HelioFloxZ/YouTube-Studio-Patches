@@ -1,32 +1,54 @@
 package app.template.patches.example
 
-import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
-import app.morphe.patcher.patch.bytecodePatch
-import app.template.patches.shared.Constants.COMPATIBILITY_EXAMPLE
+import inline.activity.InlineActivity
+import inline.bytecode.Instruction
+import inline.bytecode.Opcode
+import inline.patch.Patch
+import inline.patch.annotation.PatchBinding
 
-private const val EXTENSION_CLASS = "Lapp/template/extension/ExamplePatch;"
+@PatchBinding(
+    name = "Disable forced updates",
+    description = "Disables the forced update popup and redirection in YT Studio.",
+    dependencies = []
+)
+object ExamplePatch : Patch() {
 
-@Suppress("unused")
-val examplePatch = bytecodePatch(
-    name = "Example Patch",
-    description = "Example patch to start with.",
-    default = true
-) {
-    compatibleWith(COMPATIBILITY_EXAMPLE)
+    override fun execute() {
+        // Method 1: Intercepting the Google Play In-App Update API
+        // This targets the AppUpdateInfo check which decides if an update is available
+        val appUpdateInfoClass = context.fingerprints.findClass("com.google.android.play.core.appupdate.AppUpdateInfo")
+        
+        appUpdateInfoClass?.let { clazz ->
+            // Locate the method that checks if a specific update flow is allowed
+            // Usually: isUpdateTypeAllowed(AppUpdateOptions) or similar returning a Boolean
+            val updateAllowedMethod = clazz.methods.firstOrNull { 
+                it.returnType == "Z" && it.parameters.size == 1 
+            }
 
-    dependsOn(internalPatch)
+            updateAllowedMethod?.patch {
+                // Wipe the existing instructions and force it to return false (0)
+                instructions.clear()
+                instructions.add(Instruction(Opcode.CONST_4, 0, 0)) // v0 = 0 (false)
+                instructions.add(Instruction(Opcode.RETURN, 0))     // return v0
+            }
+        }
 
-    extendWith("extensions/extension.mpe")
+        // Method 2: Spoofing the Version Code via PackageInfo intercept
+        // If the app checks its own version against a hardcoded timestamp, 
+        // we intercept the version check method to return a far-future version code.
+        val versionConfigClass = context.fingerprints.findClass("com.google.android.apps.youtube.creator.VersionConfig")
+        
+        versionConfigClass?.let { clazz ->
+            val getVersionCodeMethod = clazz.methods.firstOrNull { 
+                it.returnType == "I" && it.parameters.isEmpty() 
+            }
 
-    // Business logic of the patch to disable ads in the app.
-    execute {
-        AdLoaderFingerprint.method.addInstructions(
-            0,
-            """
-                invoke-static {}, $EXTENSION_CLASS;->showAds()Z
-                move-result v0
-                return v0
-            """
-        )
+            getVersionCodeMethod?.patch {
+                instructions.clear()
+                // Force return a massive version code (e.g., 20261234)
+                instructions.add(Instruction(Opcode.CONST, 0, 126340007)) 
+                instructions.add(Instruction(Opcode.RETURN, 0))
+            }
+        }
     }
 }
