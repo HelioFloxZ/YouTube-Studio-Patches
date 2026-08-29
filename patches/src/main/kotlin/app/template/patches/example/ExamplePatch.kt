@@ -1,10 +1,11 @@
-package app.template.patches.example
+package inline
 
 import inline.activity.InlineActivity
 import inline.bytecode.Instruction
 import inline.bytecode.Opcode
 import inline.patch.Patch
 import inline.patch.annotation.PatchBinding
+import app.template.patches.shared.Constants
 
 @PatchBinding(
     name = "Disable forced updates",
