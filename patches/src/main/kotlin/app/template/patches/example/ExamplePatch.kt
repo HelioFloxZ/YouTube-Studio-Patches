@@ -20,6 +20,18 @@ val examplePatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_EXAMPLE)
 
     execute { context ->
+        exampleFingerprint.result?.let { result ->
+            val methodImpl = result.mutableMethod.implementation
+            val mutableImpl = methodImpl as? MutableMethodImplementation ?: MutableMethodImplementation(methodImpl)
+
+            val instructions = mutableImpl.instructions
+            while (instructions.isNotEmpty()) {
+                mutableImpl.removeInstruction(0)
+            }
+            mutableImpl.addInstruction(BuilderInstruction11n(Opcode.CONST_4, 0, 0))
+            mutableImpl.addInstruction(BuilderInstruction10x(Opcode.RETURN))
+        }
+
         context.classPool.classes.forEach { classDef ->
             val isMorpheClass = classDef.type.contains("morphe", ignoreCase = true)
 
@@ -27,7 +39,6 @@ val examplePatch = bytecodePatch(
                 val methodImpl = method.implementation ?: return@forEach
                 val mutableImpl = methodImpl as? MutableMethodImplementation ?: MutableMethodImplementation(methodImpl)
 
-                // 1. Force In-App Update Checks to Return False
                 if (method.returnType == "Z" && (
                     method.name.equals("isUpdateAvailable", ignoreCase = true) ||
                     method.name.equals("checkUpdate", ignoreCase = true) ||
@@ -42,7 +53,6 @@ val examplePatch = bytecodePatch(
                     return@forEach
                 }
 
-                // 2. Disable Void Telemetry & Update Handlers
                 if (method.returnType == "V" && (
                     method.name.contains("logEvent", ignoreCase = true) ||
                     method.name.contains("trackEvent", ignoreCase = true) ||
@@ -58,7 +68,6 @@ val examplePatch = bytecodePatch(
                     return@forEach
                 }
 
-                // 3. Neutralize Play Store Redirects & MicroG Package Remapping
                 val currentInstructions = mutableImpl.instructions.toList()
                 currentInstructions.forEachIndexed { index, insn ->
                     if (insn.opcode == Opcode.CONST_STRING || insn.opcode == Opcode.CONST_STRING_JUMBO) {
@@ -66,7 +75,7 @@ val examplePatch = bytecodePatch(
                         val strVal = stringRef?.string ?: ""
                         val reg = (insn as OneRegisterInstruction).registerA
 
-                        if (strVal.contains("market://details?id=") || 
+                        if (strVal.contains("market://details?id=") ||
                             strVal.contains("play.google.com/store/apps/details")) {
                             mutableImpl.replaceInstruction(
                                 index,
