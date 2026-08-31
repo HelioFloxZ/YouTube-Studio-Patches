@@ -1,3 +1,16 @@
+## [1.0.0-dev.2](https://github.com/HelioFloxZ/YouTube-Studio-Patches/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2026-08-31)
+
+### 🐛 Bug Fixes
+
+* Fixed Constants.kt ([1fb528e](https://github.com/HelioFloxZ/YouTube-Studio-Patches/commit/1fb528ea2d571fcc55c5b19b07f48bd62073dec5))
+* Fixed ExamplePatch.kt ([369526b](https://github.com/HelioFloxZ/YouTube-Studio-Patches/commit/369526b1ed7971647a7af352bab56f0d928b4bc5))
+* Fixed ExamplePatch.kt ([d131cfa](https://github.com/HelioFloxZ/YouTube-Studio-Patches/commit/d131cfa5b26b87938eb1d2bdbdd9e2bb4709d87d))
+
+### ✨ New Features
+
+* Added Disable Telemetry And Playstore Updates Redirection and Updates Disable Patch. ([fca024d](https://github.com/HelioFloxZ/YouTube-Studio-Patches/commit/fca024d1a848f87056839dcd7661c43ed8c677a7))
+* Added Disable Telemetry Playstore Update Redirects And Updates To YouTube Studio. ([4d8c9a1](https://github.com/HelioFloxZ/YouTube-Studio-Patches/commit/4d8c9a1bb2742de7a79399ce1aef04180dc5a5a2))
+
 ## 1.0.0-dev.1 (2026-08-31)
 
 ### 🐛 Bug Fixes
