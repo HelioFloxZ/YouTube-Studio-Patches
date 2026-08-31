@@ -18,7 +18,6 @@ val examplePatch = bytecodePatch(
 
     extendWith("extensions/extension.mpe")
 
-    // Business logic of the patch to disable ads in the app.
     execute {
         AdLoaderFingerprint.method.addInstructions(
             0,
