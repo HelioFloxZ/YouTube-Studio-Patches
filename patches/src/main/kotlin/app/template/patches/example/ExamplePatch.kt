@@ -12,8 +12,6 @@ val examplePatch = bytecodePatch(
     description = "Example patch to start with.",
     default = true
 ) {
-    compatibleWith(COMPATIBILITY_EXAMPLE)
-
     dependsOn(internalPatch)
 
     extendWith("extensions/extension.mpe")
