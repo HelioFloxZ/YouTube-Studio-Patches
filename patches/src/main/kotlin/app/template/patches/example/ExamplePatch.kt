@@ -1,29 +1,27 @@
 package app.template.patches.example
 
-import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
-import app.morphe.patcher.patch.bytecodePatch
-import app.template.patches.shared.Constants.COMPATIBILITY_EXAMPLE
+import app.morphe.patcher.fingerprint.methodFingerprint
+import com.android.tools.smali.dexlib2.Opcode
 
-private const val EXTENSION_CLASS = "Lapp/template/extension/ExamplePatch;"
+val updateDialogFingerprint = methodFingerprint(
+    returnType = "V",
+    strings = listOf("market://details?id=com.google.android.apps.youtube.creator", "play.google.com")
+)
 
-@Suppress("unused")
-val examplePatch = bytecodePatch(
-    name = "Example Patch",
-    description = "Example patch to start with.",
-    default = true
-) {
-    dependsOn(internalPatch)
+val forceUpdateCheckFingerprint = methodFingerprint(
+    returnType = "Z",
+    strings = listOf("force_update", "is_update_required")
+)
 
-    extendWith("extensions/extension.mpe")
+val gmsCoreAuthFingerprint = methodFingerprint(
+    strings = listOf("com.google.android.gms.auth", "oauth2:"),
+    opcodes = listOf(
+        Opcode.CONST_STRING,
+        Opcode.INVOKE_STATIC
+    )
+)
 
-    execute {
-        AdLoaderFingerprint.method.addInstructions(
-            0,
-            """
-                invoke-static {}, $EXTENSION_CLASS;->showAds()Z
-                move-result v0
-                return v0
-            """
-        )
-    }
-}
+val clearcutTelemetryFingerprint = methodFingerprint(
+    returnType = "V",
+    strings = listOf("ClearcutLogger", "logEvent")
+)
