@@ -1,11 +1,37 @@
 package app.template.extension.extension;
 
-@SuppressWarnings("unused")
-public class ExamplePatch {
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 
-    public static boolean showAds() {
-        // Complex Java logic goes here.
-        // Simple patches that override with fixed values do not need to use or call extension code.
+public class ExamplePatch {
+    public static final String GMS_CORE_PACKAGE_NAME = "app.revanced.android.gms";
+    public static final String GMS_CORE_AUTH_ACTION = "app.revanced.android.gms.auth.GOOGLE_AUTH";
+
+    public static String getGmsCorePackageName() {
+        return GMS_CORE_PACKAGE_NAME;
+    }
+
+    public static Account[] getAccounts(Context context, String type) {
+        try {
+            AccountManager manager = AccountManager.get(context);
+            return manager.getAccountsByType("com.google");
+        } catch (Exception e) {
+            return new Account[0];
+        }
+    }
+
+    public static boolean handleStoreIntent(Context context, Intent intent) {
+        if (intent == null) return false;
+        Uri uri = intent.getData();
+        if (uri != null) {
+            String uriStr = uri.toString();
+            if (uriStr.contains("market://details") || uriStr.contains("play.google.com/store/apps")) {
+                return true;
+            }
+        }
         return false;
     }
 }
