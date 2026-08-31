@@ -1,6 +1,9 @@
 package app.template.patches.shared
 
-import inline.patch.Compatibility
+import app.morphe.patcher.patch.ApkFileType
+import app.morphe.patcher.patch.AppTarget
+import app.morphe.patcher.patch.Compatibility
+import app.morphe.patcher.patch.SupportedAbi
 
 object Constants {
     // Target Package Name for YouTube Studio
