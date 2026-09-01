@@ -1,3 +1,10 @@
+## [1.0.0-dev.3](https://github.com/HelioFloxZ/YouTube-Studio-Patches/compare/v1.0.0-dev.2...v1.0.0-dev.3) (2026-09-01)
+
+### 🐛 Bug Fixes
+
+* Fixed ExamplePatch.kt ([ba685f6](https://github.com/HelioFloxZ/YouTube-Studio-Patches/commit/ba685f6daf165b7b606d3e1dc20e4f679646dd2b))
+* Fixed Fingerprints.kt ([f4f37bb](https://github.com/HelioFloxZ/YouTube-Studio-Patches/commit/f4f37bb0814d12a7ac88df5e2464047ec225d9af))
+
 ## [1.0.0-dev.2](https://github.com/HelioFloxZ/YouTube-Studio-Patches/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2026-08-31)
 
 ### 🐛 Bug Fixes
