@@ -8,7 +8,6 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.resourcePatch
 import app.morphe.patcher.patch.bytecodePatch
 import app.template.patches.shared.Constants.YT_STUDIO_COMPATIBILITY
-import app.template.patches.shared.gms.IsGooglePlayServicesAvailableFingerprint
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21c
 import com.android.tools.smali.dexlib2.iface.ClassDef
@@ -324,10 +323,7 @@ val ytStudioGmsCoreSupportPatch = bytecodePatch(
 
         ServiceCheckFingerprint.method.addInstruction(0, "return-void")
 
-        IsGooglePlayServicesAvailableFingerprint.methodOrNull?.let { method ->
-            method.addInstruction(0, "return v0")
-            method.addInstruction(0, "const/4 v0, 0x0")
-        }
+    
 
         AccountValidityMonitorCheckFingerprint.method.addInstruction(0, "return-void")
 
