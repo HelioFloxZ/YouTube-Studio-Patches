@@ -1,3 +1,15 @@
+## [1.0.0-dev.4](https://github.com/HelioFloxZ/YouTube-Studio-Patches/compare/v1.0.0-dev.3...v1.0.0-dev.4) (2026-09-02)
+
+### 🐛 Bug Fixes
+
+* Fixed App Icon Color in Constants.kt ([c5c365d](https://github.com/HelioFloxZ/YouTube-Studio-Patches/commit/c5c365ded822916add7ca3d7bd6929d8bbc9e58b))
+* Fixed Fingerprints inside GmsCorePatch.kt ([4969d72](https://github.com/HelioFloxZ/YouTube-Studio-Patches/commit/4969d72fdf1cf9dd035046802f1cef7096dc9fb2))
+* Fixed Issues Inside Constants.kt ([427e293](https://github.com/HelioFloxZ/YouTube-Studio-Patches/commit/427e2938fbd19dfd0e9a935479b89912aa0d66c0))
+
+### ✨ New Features
+
+* Added GmsCorePatch.kt ([80dd941](https://github.com/HelioFloxZ/YouTube-Studio-Patches/commit/80dd9417751e25b77ed81396477dfdd3ce34d0eb))
+
 ## [1.0.0-dev.3](https://github.com/HelioFloxZ/YouTube-Studio-Patches/compare/v1.0.0-dev.2...v1.0.0-dev.3) (2026-09-01)
 
 ### 🐛 Bug Fixes
