@@ -12,7 +12,7 @@ object Constants {
         name = "YouTube Studio",
         packageName = YT_STUDIO_PACKAGE_NAME,
         apkFileType = ApkFileType.APK,
-        appIconColor = 0xFF000000.toInt(),
+        appIconColor = 0xFF0000,
         targets = listOf(
             AppTarget(
                 version = null
