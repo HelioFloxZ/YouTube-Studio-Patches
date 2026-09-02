@@ -1,4 +1,4 @@
-package app.template.patches.ytstudio
+package app.template.patches.example
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
