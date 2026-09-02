@@ -207,7 +207,7 @@ private val FrictionlessEligibilityFingerprint = Fingerprint(
 @Suppress("unused")
 val ytStudioGmsCoreSupportPatch = bytecodePatch(
     name = "GmsCore support",
-    description = "Adds MicroG/GmsCore support metadata for YouTube Studio.",
+    description = "Adds MicroG support metadata for YouTube Studio.",
     default = true,
 ) {
     compatibleWith(YT_STUDIO_COMPATIBILITY)
