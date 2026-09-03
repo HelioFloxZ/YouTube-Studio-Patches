@@ -1,15 +1,33 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "patches": [
     {
-      "name": "Example Patch",
-      "description": "Example patch to start with.",
-      "default": false,
+      "name": "GmsCore support",
+      "description": "Adds MicroG support metadata for YouTube Studio.",
+      "default": true,
       "dependencies": [
-        "BytecodePatch"
+        "ResourcePatch"
       ],
-      "compatiblePackages": null,
+      "compatiblePackages": [
+        {
+          "packageName": "com.google.android.apps.youtube.creator",
+          "name": "YouTube Studio",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#FF0000",
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
       "options": []
     }
   ]
