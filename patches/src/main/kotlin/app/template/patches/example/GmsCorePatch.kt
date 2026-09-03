@@ -191,17 +191,11 @@ private val ServiceCheckFingerprint = Fingerprint(
 )
 
 private val AccountValidityMonitorCheckFingerprint = Fingerprint(
-    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    definingClass = "Lcom/google/android/libraries/youtube/account/service/AccountsChangedJobIntentService;",
+    name = "a",
     returnType = "V",
     parameters = listOf("Landroid/content/Intent;"),
-    strings = listOf("Account was removed from the device: "),
-)
-
-private val FrictionlessEligibilityFingerprint = Fingerprint(
-    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-    returnType = "V",
-    parameters = listOf("Z"),
-    strings = listOf("Failed to clear local frictionless state when account status changed"),
+    strings = listOf("Account was removed from device"),
 )
 
 @Suppress("unused")
