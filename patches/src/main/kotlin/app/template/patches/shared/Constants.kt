@@ -5,9 +5,10 @@ import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
 
 object Constants {
-    const val YT_STUDIO_PACKAGE_NAME = "com.google.android.apps.youtube.creator"
+    const val YT_STUDIO_PACKAGE_NAME =
+        "com.google.android.apps.youtube.creator"
 
-    val COMPATIBILITY_EXAMPLE = Compatibility(
+    val YT_STUDIO_COMPATIBILITY = Compatibility(
         name = "YouTube Studio",
         packageName = YT_STUDIO_PACKAGE_NAME,
         apkFileType = ApkFileType.APK,
